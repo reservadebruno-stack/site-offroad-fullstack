@@ -15,7 +15,7 @@ function Registrations() {
     // Função para buscar o nome do evento
     const fetchEventName = async () => {
       try {
-        const res = await fetch(`http://localhost:3001/api/events/${eventId}`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/events/${eventId}`);
         const data = await res.json();
         if (res.ok) {
           setEventName(data.title);
@@ -28,7 +28,7 @@ function Registrations() {
     // Função para buscar as inscrições
     const fetchRegistrations = async () => {
       try {
-        const res = await fetch(`http://localhost:3001/api/events/${eventId}/registrations`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/events/${eventIdToRegistrations}`, {
           headers: {
             'x-auth-token': token, // Envia o token para a rota protegida
           },

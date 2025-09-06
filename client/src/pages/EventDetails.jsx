@@ -12,7 +12,7 @@ function EventDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/events/${id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/events`)
       .then(response => response.json())
       .then(data => setEvent(data))
       .catch(error => console.error('Erro ao buscar detalhes do evento:', error));
@@ -26,7 +26,7 @@ function EventDetails() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:3001/api/events/${id}/register`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/events/${eventIdToSubmit}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

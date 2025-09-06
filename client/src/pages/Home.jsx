@@ -17,7 +17,7 @@ function Home() {
       setIsLoggedIn(true);
     }
 
-    fetch('http://localhost:3001/api/events')
+    fetch(`${import.meta.env.VITE_API_URL}/api/events`)
       .then(response => response.json())
       .then(data => setEvents(data))
       .catch(error => console.error('Erro ao buscar eventos:', error));
@@ -25,7 +25,7 @@ function Home() {
 
   const handleEventCreated = (newEvent) => {
     const token = localStorage.getItem('token');
-    fetch('http://localhost:3001/api/events', {
+    fetch(`${import.meta.env.VITE_API_URL}/api/events`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
       body: JSON.stringify(newEvent),
@@ -44,7 +44,7 @@ function Home() {
     const token = localStorage.getItem('token');
     if (!window.confirm('Tem certeza que deseja deletar este evento?')) return;
 
-    fetch(`http://localhost:3001/api/events/${eventIdToDelete}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/api/events/${eventIdToDelete}`, {
       method: 'DELETE',
       headers: { 'x-auth-token': token },
     })
@@ -60,7 +60,7 @@ function Home() {
 
   const handleUpdateEvent = (updatedEvent) => {
     const token = localStorage.getItem('token');
-    fetch(`http://localhost:3001/api/events/${updatedEvent._id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/api/events/${updatedEvent._id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
       body: JSON.stringify(updatedEvent),
